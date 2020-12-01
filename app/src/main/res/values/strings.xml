@@ -22,4 +22,13 @@
     <string name="error_streams">Error getting Streams</string>
     <string name="error_profile">Error getting Profile</string>
     <string name="error_profile_update">Error updating profile</string>
+
+    <string name="preference_acces_token">acces_token</string>
+    <string name="preference_refresh_token">refresh_token</string>
+    <string name="profile">Profile</string>
+    <string name="stream_name">stream name</string>
+    <string name="user_name">user_name</string>
+    <string name="position">position</string>
+    <string name="stream_image_description">stream image description</string>
+
 </resources>

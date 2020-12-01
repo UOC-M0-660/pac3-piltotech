@@ -1,12 +1,18 @@
 package edu.uoc.pac3.data
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
+import edu.uoc.pac3.R
 
 /**
  * Created by alex on 06/09/2020.
  */
 
-class SessionManager(context: Context) {
+class SessionManager(val context: Context) {
+
+    val PREFS_NAME = "edu.uoc.pac3.sharedpreferences"
+    val sharedPref: SharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
 
     fun isUserAvailable(): Boolean {
         // TODO: Implement
@@ -14,28 +20,40 @@ class SessionManager(context: Context) {
     }
 
     fun getAccessToken(): String? {
-        // TODO: Implement
-        return null
+        //Log.d("Session", "Get AccessToken: ${sharedPref.getString(context.getString(R.string.preference_acces_token), null)}.")
+        return sharedPref.getString(context.getString(R.string.preference_acces_token), null)
     }
 
     fun saveAccessToken(accessToken: String) {
-        TODO("Save Access Token")
+        with (sharedPref.edit()) {
+            putString(context.getString(R.string.preference_acces_token), accessToken)
+            commit()
+        }
     }
 
     fun clearAccessToken() {
-        TODO("Clear Access Token")
+        with (sharedPref.edit()) {
+            putString(context.getString(R.string.preference_acces_token), null)
+            commit()
+        }
     }
 
     fun getRefreshToken(): String? {
-        TODO("Get Refresh Token")
+        return sharedPref.getString(context.getString(R.string.preference_refresh_token), null)
     }
 
     fun saveRefreshToken(refreshToken: String) {
-        TODO("Save Refresh Token")
+        with (sharedPref.edit()) {
+            putString(context.getString(R.string.preference_refresh_token), refreshToken)
+            commit()
+        }
     }
 
     fun clearRefreshToken() {
-        TODO("Clear Refresh Token")
+        with (sharedPref.edit()) {
+            putString(context.getString(R.string.preference_refresh_token), null)
+            commit()
+        }
     }
 
 }
