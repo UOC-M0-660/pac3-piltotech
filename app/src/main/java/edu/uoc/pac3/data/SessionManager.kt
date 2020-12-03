@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import edu.uoc.pac3.R
+import edu.uoc.pac3.oauth.ErrorInterceptor
 
 /**
  * Created by alex on 06/09/2020.

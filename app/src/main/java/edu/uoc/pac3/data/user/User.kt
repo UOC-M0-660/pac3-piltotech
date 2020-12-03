@@ -10,12 +10,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class User(
-    @SerialName("display_name") val userName: String? = null,
-    @SerialName("description") val description: String? = null,
-    @SerialName("profile_image_url") val imageUrl: String? = null,
+        @SerialName("display_name") val userName: String? = null,
+        @SerialName("description") val description: String? = null,
+        @SerialName("profile_image_url") val imageUrl: String? = null,
 )
 
 @Serializable
 data class UserResponse(
-    @SerialName("data") val data: List<User>? = null,
+        @SerialName("data") val data: List<User>? = null,
 )

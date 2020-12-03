@@ -3,6 +3,7 @@ package edu.uoc.pac3.data.network
 import android.content.Context
 import android.util.Log
 import edu.uoc.pac3.data.SessionManager
+import edu.uoc.pac3.oauth.ErrorInterceptor
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
 import io.ktor.client.features.*
@@ -11,6 +12,7 @@ import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+
 
 /**
  * Created by alex on 07/09/2020.
@@ -50,9 +52,9 @@ object Network {
                 accept(ContentType.Application.Json)
             }
             // Optional OkHttp Interceptors
-            /*engine {
-                addInterceptor(CurlInterceptor(Loggable { Log.v("Curl", it) }))
-            }*/
+            engine {
+                addInterceptor(ErrorInterceptor(context))
+            }
         }
     }
 
@@ -61,4 +63,6 @@ object Network {
         isLenient = true
         encodeDefaults = false
     }
+
+
 }

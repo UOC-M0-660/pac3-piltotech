@@ -57,16 +57,16 @@ class StreamsActivity : AppCompatActivity() {
             scopeIO.async {
                 Log.d(
                         TAG,
-                    "Getting streams. Token:" + SessionManager(this@StreamsActivity).getAccessToken() + " Cursor" + paginationCursor
+                        "Getting streams. Token:" + SessionManager(this@StreamsActivity).getAccessToken() + " Cursor" + paginationCursor
                 )
                 streamsResponse = service.getStreams(
-                    null
+                        null
                 )
 
             }.await()
             Log.d(TAG, "Streams response:")
             streamsResponse?.data?.let { streamList.addAll(it) }
-            streamsResponse?.pagination?.cursor?.let { paginationCursor = it}
+            streamsResponse?.pagination?.cursor?.let { paginationCursor = it }
 
             adapter.setStreams(streamList)
         }

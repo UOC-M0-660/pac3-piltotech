@@ -12,7 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import edu.uoc.pac3.R
 import edu.uoc.pac3.data.streams.Stream
 
-class StreamsAdapter(private var streams: List<Stream>, activity: Activity): RecyclerView.Adapter<StreamsAdapter.ViewHolder>(){
+class StreamsAdapter(private var streams: List<Stream>, activity: Activity) : RecyclerView.Adapter<StreamsAdapter.ViewHolder>() {
 
     private val mActivity = activity
 
@@ -40,17 +40,17 @@ class StreamsAdapter(private var streams: List<Stream>, activity: Activity): Rec
         val stream = getStream(position)
         holder.StreamName.text = stream.title
         holder.UserName.text = stream.userName
-        holder.Position.text = (position+1).toString()
+        holder.Position.text = (position + 1).toString()
 
         var imageurl = stream.url
         if (imageurl != null) {
-            imageurl = imageurl.replace("{width}","600",false)
-            imageurl = imageurl.replace("{height}","400",false)
+            imageurl = imageurl.replace("{width}", "600", false)
+            imageurl = imageurl.replace("{height}", "400", false)
         }
 
         Glide.with(holder.mView.context)
-            .load(imageurl)
-            .into(holder.StreamView)
+                .load(imageurl)
+                .into(holder.StreamView)
 
     }
 
@@ -65,6 +65,7 @@ class StreamsAdapter(private var streams: List<Stream>, activity: Activity): Rec
         val UserName: TextView = view.findViewById(R.id.id_user_name)
         val Position: TextView = view.findViewById(R.id.id_stream_position)
         val StreamView: ImageView = view.findViewById(R.id.id_stream_imageView)
-        var mView: View = view}
+        var mView: View = view
+    }
 
 }

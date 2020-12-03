@@ -23,15 +23,35 @@ class TwitchApiService(private val httpClient: HttpClient) {
 
         try {
             val response = httpClient.post<OAuthTokensResponse>(Endpoints.oauthTokenUrl) {
-            parameter("client_id", OAuthConstants.oauthClientId)
-            parameter("client_secret", OAuthConstants.oauthClientSecret)
-            parameter("code", authorizationCode)
-            parameter("grant_type", "authorization_code")
-            parameter("redirect_uri", Endpoints.redirectUri)
-        }
-        Log.d(TAG, "Access Token: ${response.accessToken}. Refresh Token: ${response.refreshToken}")
+                parameter("client_id", OAuthConstants.oauthClientId)
+                parameter("client_secret", OAuthConstants.oauthClientSecret)
+                parameter("code", authorizationCode)
+                parameter("grant_type", "authorization_code")
+                parameter("redirect_uri", Endpoints.redirectUri)
+            }
+            Log.d(TAG, "Access Token: ${response.accessToken}. Refresh Token: ${response.refreshToken}")
 
-        return OAuthTokensResponse(response.accessToken, response.refreshToken)
+            return OAuthTokensResponse(response.accessToken, response.refreshToken)
+        } catch (t: Throwable) {
+            Log.d(TAG, t.toString())
+        }
+        return null
+
+    }
+
+    /// Gets Access and Refresh Tokens on Twitch
+    suspend fun refreshTokens(refreshToken: String): OAuthTokensResponse? {
+
+        try {
+            val response = httpClient.post<OAuthTokensResponse>(Endpoints.oauthTokenUrl) {
+                parameter("client_id", OAuthConstants.oauthClientId)
+                parameter("client_secret", OAuthConstants.oauthClientSecret)
+                parameter("refresh_token", refreshToken)
+                parameter("grant_type", "refresh_token")
+            }
+            Log.d(TAG, "Refresh Token: ${response.accessToken}. Refresh Token: ${response.refreshToken}")
+
+            return OAuthTokensResponse(response.accessToken, response.refreshToken)
         } catch (t: Throwable) {
             Log.d(TAG, t.toString())
         }

@@ -24,7 +24,7 @@ import java.util.*
 class OAuthActivity : AppCompatActivity() {
 
     private val TAG = "OAuthActivity"
-    private lateinit var uniqueState:String
+    private lateinit var uniqueState: String
 
     private val job = Job()
     private val scopeMainThread = CoroutineScope(job + Dispatchers.Main)
@@ -39,7 +39,7 @@ class OAuthActivity : AppCompatActivity() {
 
     fun buildOAuthUri(): Uri {
         // Create URI
-        val scopes=listOf("user:read:email","user:edit")
+        val scopes = listOf("user:read:email", "user:edit")
 
         uniqueState = UUID.randomUUID().toString()
 
@@ -111,6 +111,7 @@ class OAuthActivity : AppCompatActivity() {
                 // Save access token and refresh token using the SessionManager class
                 tokenResponse?.accessToken?.let { SessionManager(this@OAuthActivity).saveAccessToken(it) }
                 tokenResponse?.refreshToken?.let { SessionManager(this@OAuthActivity).saveRefreshToken(it) }
+                //SessionManager(this@OAuthActivity).saveAccessToken("test")
             }.await()
             Log.d(TAG, "TOKEN RESPONSE2")
             startActivity(Intent(this@OAuthActivity, StreamsActivity::class.java))
