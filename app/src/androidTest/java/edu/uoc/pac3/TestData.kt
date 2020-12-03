@@ -21,7 +21,7 @@ object TestData {
     // Network
     fun provideHttpClient(context: Context): HttpClient = Network.createHttpClient(context)
     fun provideTwitchService(context: Context): TwitchApiService =
-        TwitchApiService(provideHttpClient(context))
+            TwitchApiService(provideHttpClient(context))
 
     // Tokens
     const val dummyAccessToken = "access_12345"
@@ -36,12 +36,12 @@ object TestData {
     // Token Refresh
     suspend fun setAccessToken(context: Context) {
         val response =
-            provideHttpClient(context).post<OAuthTokensResponse>("https://id.twitch.tv/oauth2/token") {
-                parameter("client_id", "efwo35z4mgyiyhje8bbp73b98oyavf")
-                parameter("client_secret", "7fl44yqjm5tjdx73z45dd9ybwuuiez")
-                parameter("refresh_token", refreshToken)
-                parameter("grant_type", "refresh_token")
-            }
+                provideHttpClient(context).post<OAuthTokensResponse>("https://id.twitch.tv/oauth2/token") {
+                    parameter("client_id", "efwo35z4mgyiyhje8bbp73b98oyavf")
+                    parameter("client_secret", "7fl44yqjm5tjdx73z45dd9ybwuuiez")
+                    parameter("refresh_token", refreshToken)
+                    parameter("grant_type", "refresh_token")
+                }
         // Save new access token
         SessionManager(context).saveAccessToken(response.accessToken)
         delay(sharedPrefsWaitingMillis)
